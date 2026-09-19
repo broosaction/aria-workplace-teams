@@ -39,7 +39,7 @@ export interface BotPackage {
     name: string;
     title: string;
     description: string;
-    appearance: { color: MausColor; mascotExpression?: string };
+    appearance: { color: MausColor; mascotExpression?: string; mascotBody?: string };
     playbooks?: string[];
   }>;
   chiefOfStaff?: string;

@@ -43,6 +43,7 @@ agents:
     appearance:
       color: blue
       mascotExpression: curious
+      mascotBody: hexagon
     playbooks:
       - change-detection
   - key: prism
@@ -52,6 +53,7 @@ agents:
     appearance:
       color: purple
       mascotExpression: thinking
+      mascotBody: diamond
     playbooks:
       - decision-brief
 chiefOfStaff: prism

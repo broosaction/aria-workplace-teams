@@ -45,6 +45,7 @@ agents:
     appearance:
       color: teal
       mascotExpression: focused
+      mascotBody: shield
     playbooks:
       - follow-up-triage
   - key: nudge
@@ -54,6 +55,7 @@ agents:
     appearance:
       color: green
       mascotExpression: happy
+      mascotBody: drop
     playbooks:
       - specific-follow-up
 chiefOfStaff: keeper

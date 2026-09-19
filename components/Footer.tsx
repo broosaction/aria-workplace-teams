@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <p>
-        <img className="footer-mark" src={asset("/broos-mark-gray.png")} alt="" width={18} height={18} />
+        <img className="footer-mark" src={asset("/aria-icon.png")} alt="" width={18} height={18} />
         A Broos Action product. Portable AI teams in one Markdown file.
       </p>
       <div>

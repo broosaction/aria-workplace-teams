@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { useMemo, useState, type CSSProperties } from "react";
 
-import AgentMark from "@/components/AgentMark";
+import MausAvatar from "@/components/MausAvatar";
 import ConnectorIcon from "@/components/ConnectorIcon";
 
 export interface DirectoryEntry {
@@ -22,7 +22,7 @@ export interface DirectoryEntry {
   featured: boolean;
   setupMinutes: number;
   apps: Array<{ slug: string; label: string }>;
-  agents: Array<{ name: string; color: string; expression: string }>;
+  agents: Array<{ name: string; color: string; expression: string; body?: string }>;
   rooms: number;
   playbooks: number;
   routines: number;
@@ -45,7 +45,13 @@ function TeamCard({ entry, index }: { entry: DirectoryEntry; index: number }) {
             <h2>{entry.name}</h2>
             <p className="team-card-author">by {entry.author.name}</p>
           </div>
-          <AgentMark name={lead.name} color={lead.color} size={44} />
+          <MausAvatar
+            label={lead.name}
+            color={lead.color}
+            expression={lead.expression ?? "happy"}
+            bodyId={lead.body}
+            size={48}
+          />
         </div>
 
         <p className="team-card-description">{entry.tagline}</p>
@@ -116,20 +122,17 @@ export default function Directory({ entries }: { entries: DirectoryEntry[] }) {
           <p className="overline">BROOS ACTION</p>
           <h1 id="directory-title">Ready-to-run AI teams</h1>
           <p>Portable playbooks for sales, marketing, research, operations, coding, and everyday work.</p>
-          <div className="hero-actions">
-            <label className="hero-search">
-              <Search size={19} strokeWidth={1.7} aria-hidden="true" />
-              <span className="sr-only">Search teams</span>
-              <input
-                type="search"
-                placeholder="Search teams…"
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-                autoComplete="off"
-              />
-            </label>
-            <Link className="button button-primary" href="/publish">Submit a team</Link>
-          </div>
+          <label className="hero-search">
+            <Search size={19} strokeWidth={1.7} aria-hidden="true" />
+            <span className="sr-only">Search teams</span>
+            <input
+              type="search"
+              placeholder="Search teams…"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              autoComplete="off"
+            />
+          </label>
         </section>
 
         <section className="directory-list" aria-label="Aria Workplace teams">

@@ -5,6 +5,19 @@ import { parse as parseYaml } from "yaml";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const errors = [];
+const allowedBodies = new Set([
+  "blob",
+  "circle",
+  "squircle",
+  "capsule",
+  "drop",
+  "cloud",
+  "shield",
+  "triangle",
+  "hexagon",
+  "diamond",
+  "star",
+]);
 const allowedColors = new Set([
   "green",
   "blue",
@@ -85,6 +98,7 @@ function validateManifest(path, expectedMembers) {
     if (typeof member?.title !== "string" || member.title.length > 200) fail(`${at} has an invalid title`);
     if (typeof member?.description !== "string" || member.description.length > 4000) fail(`${at} has an invalid description`);
     if (!allowedColors.has(member?.appearance?.color)) fail(`${at} has an unsupported color`);
+    if (member?.appearance?.mascotBody && !allowedBodies.has(member.appearance.mascotBody)) fail(`${at} has an unsupported mascotBody`);
   }
   const room = team.room;
   if (!room || !text(room.name, 100) || typeof room.bulletin !== "string") fail(`${path}: room is invalid`);
@@ -165,6 +179,7 @@ function validatePackage(path, slug, expectedMembers) {
     if (typeof agent?.title !== "string" || agent.title.length > 200) fail(`${at} has an invalid title`);
     if (typeof agent?.description !== "string" || agent.description.length > 4000) fail(`${at} has an invalid description`);
     if (!allowedColors.has(agent?.appearance?.color)) fail(`${at} has an unsupported color`);
+    if (agent?.appearance?.mascotBody && !allowedBodies.has(agent.appearance.mascotBody)) fail(`${at} has an unsupported mascotBody`);
   }
   if (pkg.chiefOfStaff !== undefined && !agentKeys.has(pkg.chiefOfStaff)) {
     fail(`${path}: package.chiefOfStaff references an unknown agent`);

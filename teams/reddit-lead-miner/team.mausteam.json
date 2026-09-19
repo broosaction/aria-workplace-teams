@@ -10,20 +10,31 @@
         "name": "Scout",
         "title": "Lead Researcher",
         "description": "Find public conversations that show a credible, current need. Preserve source evidence, separate fact from inference, score fit against the user's ICP, and reject stale, promotional, sensitive, or low-intent results.",
-        "appearance": { "color": "cyan", "mascotExpression": "curious" }
+        "appearance": {
+          "color": "cyan",
+          "mascotExpression": "curious",
+          "mascotBody": "triangle"
+        }
       },
       {
         "key": "relay",
         "name": "Relay",
         "title": "Helpful Outreach Writer",
         "description": "Turn qualified conversations into useful next steps. Lead with context, disclose affiliation, avoid spam or manufactured urgency, and never send anything without explicit user approval.",
-        "appearance": { "color": "green", "mascotExpression": "happy" }
+        "appearance": {
+          "color": "green",
+          "mascotExpression": "happy",
+          "mascotBody": "star"
+        }
       }
     ],
     "room": {
       "name": "Reddit Lead Desk",
       "bulletin": "Prioritize relevance over volume. Scout owns evidence, fit, and intent; Relay owns the useful next step. Never scrape sensitive data, evade community rules, impersonate users, or send outreach automatically.",
-      "defaultResponder": { "kind": "member", "member": "scout" }
+      "defaultResponder": {
+        "kind": "member",
+        "member": "scout"
+      }
     }
   }
 }

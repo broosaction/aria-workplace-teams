@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   description:
     "Discover portable AI teams from Broos Action for sales, marketing, research, operations, coding, and everyday work.",
-  icons: { icon: "/favicon.png" },
+  icons: { icon: "/aria-icon.png" },
   openGraph: {
     title: "Aria Workplace Teams",
     description: "Pick a team, connect your apps, and turn it on.",

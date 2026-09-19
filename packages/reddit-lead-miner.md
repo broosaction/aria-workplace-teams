@@ -45,6 +45,7 @@ agents:
     appearance:
       color: cyan
       mascotExpression: curious
+      mascotBody: triangle
     playbooks:
       - lead-qualification
   - key: relay
@@ -54,6 +55,7 @@ agents:
     appearance:
       color: green
       mascotExpression: happy
+      mascotBody: star
     playbooks:
       - safe-outreach
 chiefOfStaff: scout

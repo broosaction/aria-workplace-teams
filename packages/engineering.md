@@ -42,6 +42,7 @@ agents:
     appearance:
       color: purple
       mascotExpression: focused
+      mascotBody: diamond
     playbooks:
       - architecture-decision
       - implementation-plan
@@ -52,6 +53,7 @@ agents:
     appearance:
       color: green
       mascotExpression: thinking
+      mascotBody: squircle
     playbooks:
       - architecture-decision
       - implementation-plan
@@ -62,6 +64,7 @@ agents:
     appearance:
       color: cyan
       mascotExpression: happy
+      mascotBody: blob
     playbooks:
       - implementation-plan
   - key: rigel
@@ -71,6 +74,7 @@ agents:
     appearance:
       color: orange
       mascotExpression: curious
+      mascotBody: shield
     playbooks:
       - release-readiness
 chiefOfStaff: ada

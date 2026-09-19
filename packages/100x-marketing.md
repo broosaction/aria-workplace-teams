@@ -46,6 +46,7 @@ agents:
     appearance:
       color: purple
       mascotExpression: focused
+      mascotBody: cloud
     playbooks:
       - positioning-brief
       - campaign-sprint
@@ -57,6 +58,7 @@ agents:
     appearance:
       color: coral
       mascotExpression: happy
+      mascotBody: capsule
     playbooks:
       - positioning-brief
       - campaign-sprint
@@ -67,6 +69,7 @@ agents:
     appearance:
       color: blue
       mascotExpression: curious
+      mascotBody: circle
     playbooks:
       - campaign-sprint
   - key: lens
@@ -76,6 +79,7 @@ agents:
     appearance:
       color: teal
       mascotExpression: thinking
+      mascotBody: hexagon
     playbooks:
       - experiment-review
 chiefOfStaff: maya

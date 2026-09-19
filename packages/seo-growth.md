@@ -42,6 +42,7 @@ agents:
     appearance:
       color: purple
       mascotExpression: focused
+      mascotBody: star
     playbooks:
       - keyword-opportunity-map
       - technical-seo-triage
@@ -53,6 +54,7 @@ agents:
     appearance:
       color: cyan
       mascotExpression: curious
+      mascotBody: triangle
     playbooks:
       - keyword-opportunity-map
   - key: atlas
@@ -62,6 +64,7 @@ agents:
     appearance:
       color: blue
       mascotExpression: thinking
+      mascotBody: hexagon
     playbooks:
       - technical-seo-triage
   - key: quill
@@ -71,6 +74,7 @@ agents:
     appearance:
       color: coral
       mascotExpression: happy
+      mascotBody: drop
     playbooks:
       - content-brief
 chiefOfStaff: nova

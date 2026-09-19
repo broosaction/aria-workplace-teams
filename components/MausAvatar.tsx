@@ -1,15 +1,10 @@
 "use client";
 
 import CursorAvatar, {
-  DEFAULT_SILHOUETTE,
   type CursorSilhouette,
   type CursorState,
 } from "@/components/CursorAvatar";
-
-const GRADIENT_SILHOUETTE: CursorSilhouette = {
-  ...DEFAULT_SILHOUETTE,
-  body: DEFAULT_SILHOUETTE.body.replace(/fill="#000000"/g, 'fill="{{GRADIENT}}"'),
-};
+import { MASCOT_BODIES, MASCOT_BODY_IDS, botMascotBody, type MascotBodyId } from "@/lib/mascot-bodies";
 
 export const MAUS_COLORS = {
   green: "#009957",
@@ -57,13 +52,24 @@ function gradientFor(color: MausColor): [string, string, string] {
   return [mix(fill, "#ffffff", 0.55), fill, mix(fill, "#000000", 0.42)];
 }
 
+function bodyFromName(name: string): MascotBodyId {
+  const hash = Array.from(name).reduce((value, character) => ((value * 31) + (character.codePointAt(0) ?? 0)) >>> 0, 0);
+  return MASCOT_BODY_IDS[hash % MASCOT_BODY_IDS.length];
+}
+
+function silhouetteFor(bodyId: MascotBodyId): CursorSilhouette {
+  const { id: _id, ...silhouette } = MASCOT_BODIES[bodyId];
+  return silhouette;
+}
+
 export default function MausAvatar({
-  color = "green",
+  color = "blue",
   expression = "happy",
   size = 44,
   animated = false,
   className,
   label,
+  bodyId,
 }: {
   color?: string;
   expression?: string;
@@ -71,16 +77,18 @@ export default function MausAvatar({
   animated?: boolean;
   className?: string;
   label?: string;
+  bodyId?: string | null;
 }) {
-  const safeColor = color in MAUS_COLORS ? (color as MausColor) : "green";
+  const safeColor = color in MAUS_COLORS ? (color as MausColor) : "blue";
   const state = STATE_ALIASES[expression] ?? "happy";
+  const body = bodyId ? botMascotBody(bodyId) : bodyFromName(label ?? safeColor);
 
   return (
     <CursorAvatar
       className={className}
       size={size}
       state={state}
-      silhouette={GRADIENT_SILHOUETTE}
+      silhouette={silhouetteFor(body)}
       gradient={gradientFor(safeColor)}
       eyeScale={1.12}
       mouthStroke={11}

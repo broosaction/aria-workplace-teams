@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import ConnectorIcon from "@/components/ConnectorIcon";
 import CopyMarkdown from "@/components/CopyMarkdown";
 import InstallButton from "@/components/InstallButton";
-import AgentMark from "@/components/AgentMark";
+import MausAvatar from "@/components/MausAvatar";
 import { getPackage, getPackageMarkdown, getPackages, packageInstallUrl, packageRawUrl } from "@/lib/packages";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -48,10 +48,13 @@ export default async function PackagePage({ params }: Props) {
           <div className="detail-heading-row">
             <div>
               <div className="detail-title">
-                <AgentMark
-                  name={entry.agents[0]?.name ?? entry.name}
+                <MausAvatar
+                  label={entry.agents[0]?.name ?? entry.name}
                   color={entry.agents[0]?.appearance.color ?? "blue"}
-                  size={56}
+                  expression={entry.agents[0]?.appearance.mascotExpression ?? "happy"}
+                  bodyId={entry.agents[0]?.appearance.mascotBody}
+                  size={64}
+                  animated
                 />
                 <h1>{entry.name}</h1>
               </div>
@@ -90,9 +93,11 @@ export default async function PackagePage({ params }: Props) {
             <div className="member-grid">
               {entry.agents.map((agent) => (
                 <div className="member-card" key={agent.key}>
-                  <AgentMark
-                    name={agent.name}
+                  <MausAvatar
+                    label={agent.name}
                     color={agent.appearance.color}
+                    expression={agent.appearance.mascotExpression ?? "happy"}
+                    bodyId={agent.appearance.mascotBody}
                     size={42}
                   />
                   <div><strong>{agent.name}</strong><span>{agent.title}</span></div>
@@ -137,9 +142,11 @@ export default async function PackagePage({ params }: Props) {
               <Link href={`/bots/${candidate.id}`}>
                 <div>
                   <h3>{candidate.name}</h3>
-                  <AgentMark
-                    name={candidate.agents[0]?.name ?? candidate.name}
+                  <MausAvatar
+                    label={candidate.agents[0]?.name ?? candidate.name}
                     color={candidate.agents[0]?.appearance.color ?? "blue"}
+                    expression={candidate.agents[0]?.appearance.mascotExpression ?? "happy"}
+                    bodyId={candidate.agents[0]?.appearance.mascotBody}
                     size={42}
                   />
                 </div>

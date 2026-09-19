@@ -16,6 +16,7 @@ export default function Home() {
       name: agent.name,
       color: agent.appearance.color,
       expression: agent.appearance.mascotExpression ?? "happy",
+      body: agent.appearance.mascotBody,
     })),
     rooms: entry.rooms?.length ?? 0,
     playbooks: entry.playbooks?.length ?? 0,
