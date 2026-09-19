@@ -3,15 +3,14 @@
 import {
   ArrowUpRight,
   Bot,
-  Plus,
   Search,
   Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, type CSSProperties } from "react";
 
+import AgentMark from "@/components/AgentMark";
 import ConnectorIcon from "@/components/ConnectorIcon";
-import MausAvatar from "@/components/MausAvatar";
 
 export interface DirectoryEntry {
   id: string;
@@ -32,30 +31,13 @@ export interface DirectoryEntry {
 
 type SortOption = "featured" | "agents" | "setup" | "name";
 
-const submitSlots = Array.from({ length: 10 }, (_, index) => index + 1);
-
-function SubmitCard() {
-  return (
-    <Link className="sponsor-card" href="/publish" aria-label="Submit a team">
-      <span className="sponsor-card-icon" aria-hidden="true"><Plus size={20} strokeWidth={1.7} /></span>
-      <strong>Submit</strong>
-      <p>Share a playbook</p>
-    </Link>
-  );
-}
-
 function TeamCard({ entry, index }: { entry: DirectoryEntry; index: number }) {
-  const lead = entry.agents[0] ?? { color: "green", expression: "happy" };
-  const [mascotActive, setMascotActive] = useState(false);
+  const lead = entry.agents[0] ?? { name: entry.name, color: "blue" };
 
   return (
     <article
       className="team-card"
       style={{ "--card-index": index } as CSSProperties}
-      onMouseEnter={() => setMascotActive(true)}
-      onMouseLeave={() => setMascotActive(false)}
-      onFocusCapture={() => setMascotActive(true)}
-      onBlurCapture={() => setMascotActive(false)}
     >
       <Link href={`/bots/${entry.id}`} className="team-card-link" aria-label={`Open ${entry.name}`}>
         <div className="team-card-topline">
@@ -63,14 +45,7 @@ function TeamCard({ entry, index }: { entry: DirectoryEntry; index: number }) {
             <h2>{entry.name}</h2>
             <p className="team-card-author">by {entry.author.name}</p>
           </div>
-          <span className="team-card-mascot" aria-hidden="true">
-            <MausAvatar
-              color={lead.color}
-              expression={lead.expression}
-              size={52}
-              animated={mascotActive}
-            />
-          </span>
+          <AgentMark name={lead.name} color={lead.color} size={44} />
         </div>
 
         <p className="team-card-description">{entry.tagline}</p>
@@ -134,77 +109,63 @@ export default function Directory({ entries }: { entries: DirectoryEntry[] }) {
     });
   }, [entries, integration, searchTerm, sort]);
 
-  const leftRail = submitSlots.slice(0, 5);
-  const rightRail = submitSlots.slice(5);
-
   return (
     <main className="directory-page">
-      <div className="directory-stage">
-        <aside className="directory-rail directory-rail-left" aria-label="Submit a team">
-          {leftRail.map((slot) => <SubmitCard key={slot} />)}
-        </aside>
+      <div className="directory-center">
+        <section className="directory-hero" aria-labelledby="directory-title">
+          <p className="overline">BROOS ACTION</p>
+          <h1 id="directory-title">Ready-to-run AI teams</h1>
+          <p>Portable playbooks for sales, marketing, research, operations, coding, and everyday work.</p>
+          <div className="hero-actions">
+            <label className="hero-search">
+              <Search size={19} strokeWidth={1.7} aria-hidden="true" />
+              <span className="sr-only">Search teams</span>
+              <input
+                type="search"
+                placeholder="Search teams…"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                autoComplete="off"
+              />
+            </label>
+            <Link className="button button-primary" href="/publish">Submit a team</Link>
+          </div>
+        </section>
 
-        <div className="directory-center">
-          <section className="directory-hero" aria-labelledby="directory-title">
-            <div className="directory-hero-copy">
-              <h1 id="directory-title">Ready-to-run AI teams</h1>
-              <p>Discover portable playbooks for sales, marketing, research, operations, coding, and everyday work.</p>
-              <label className="hero-search">
-                <Search size={19} strokeWidth={1.7} aria-hidden="true" />
-                <span className="sr-only">Search teams</span>
-                <input
-                  type="search"
-                  placeholder="Search teams…"
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                  autoComplete="off"
-                />
-              </label>
+        <section className="directory-list" aria-label="Aria Workplace teams">
+          <div className="directory-controls">
+            <label className="directory-select">
+              <span className="sr-only">Sort teams</span>
+              <select value={sort} onChange={(event) => setSort(event.target.value as SortOption)}>
+                <option value="featured">Featured teams</option>
+                <option value="agents">Most bots</option>
+                <option value="setup">Quickest setup</option>
+                <option value="name">Name A-Z</option>
+              </select>
+            </label>
+            <label className="directory-select">
+              <span className="sr-only">Filter by integration</span>
+              <select value={integration} onChange={(event) => setIntegration(event.target.value)}>
+                <option value="all">All integrations</option>
+                {integrations.map(([slug, label]) => <option value={slug} key={slug}>{label}</option>)}
+              </select>
+            </label>
+            <p className="directory-result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? "team" : "teams"}</p>
+          </div>
+
+          {filtered.length > 0 ? (
+            <div className="team-grid">
+              {filtered.map((entry, index) => <TeamCard entry={entry} index={index} key={entry.id} />)}
             </div>
-            <div className="hero-mascot" aria-hidden="true">
-              <MausAvatar color="green" expression="happy" size={154} animated />
+          ) : (
+            <div className="directory-empty">
+              <Bot size={27} strokeWidth={1.6} aria-hidden="true" />
+              <strong>No teams found</strong>
+              <p>Try a broader search or another integration.</p>
+              <button type="button" onClick={() => { setSearchTerm(""); setIntegration("all"); }}>Clear filters</button>
             </div>
-          </section>
-
-          <section className="directory-list" aria-label="Aria Workplace teams">
-            <div className="directory-controls">
-              <label className="directory-select">
-                <span className="sr-only">Sort teams</span>
-                <select value={sort} onChange={(event) => setSort(event.target.value as SortOption)}>
-                  <option value="featured">Featured teams</option>
-                  <option value="agents">Most bots</option>
-                  <option value="setup">Quickest setup</option>
-                  <option value="name">Name A-Z</option>
-                </select>
-              </label>
-              <label className="directory-select">
-                <span className="sr-only">Filter by integration</span>
-                <select value={integration} onChange={(event) => setIntegration(event.target.value)}>
-                  <option value="all">All integrations</option>
-                  {integrations.map(([slug, label]) => <option value={slug} key={slug}>{label}</option>)}
-                </select>
-              </label>
-              <p className="directory-result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? "team" : "teams"}</p>
-            </div>
-
-            {filtered.length > 0 ? (
-              <div className="team-grid">
-                {filtered.map((entry, index) => <TeamCard entry={entry} index={index} key={entry.id} />)}
-              </div>
-            ) : (
-              <div className="directory-empty">
-                <Bot size={27} strokeWidth={1.6} aria-hidden="true" />
-                <strong>No teams found</strong>
-                <p>Try a broader search or another integration.</p>
-                <button type="button" onClick={() => { setSearchTerm(""); setIntegration("all"); }}>Clear filters</button>
-              </div>
-            )}
-          </section>
-        </div>
-
-        <aside className="directory-rail directory-rail-right" aria-label="Submit a team">
-          {rightRail.map((slot) => <SubmitCard key={slot} />)}
-        </aside>
+          )}
+        </section>
       </div>
     </main>
   );

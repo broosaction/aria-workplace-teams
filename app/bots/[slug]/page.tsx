@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import ConnectorIcon from "@/components/ConnectorIcon";
 import CopyMarkdown from "@/components/CopyMarkdown";
 import InstallButton from "@/components/InstallButton";
-import MausAvatar from "@/components/MausAvatar";
+import AgentMark from "@/components/AgentMark";
 import { getPackage, getPackageMarkdown, getPackages, packageInstallUrl, packageRawUrl } from "@/lib/packages";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -48,11 +48,10 @@ export default async function PackagePage({ params }: Props) {
           <div className="detail-heading-row">
             <div>
               <div className="detail-title">
-                <MausAvatar
-                  color={entry.agents[0]?.appearance.color ?? "green"}
-                  expression={entry.agents[0]?.appearance.mascotExpression ?? "happy"}
-                  size={64}
-                  animated
+                <AgentMark
+                  name={entry.agents[0]?.name ?? entry.name}
+                  color={entry.agents[0]?.appearance.color ?? "blue"}
+                  size={56}
                 />
                 <h1>{entry.name}</h1>
               </div>
@@ -91,9 +90,9 @@ export default async function PackagePage({ params }: Props) {
             <div className="member-grid">
               {entry.agents.map((agent) => (
                 <div className="member-card" key={agent.key}>
-                  <MausAvatar
+                  <AgentMark
+                    name={agent.name}
                     color={agent.appearance.color}
-                    expression={agent.appearance.mascotExpression ?? "happy"}
                     size={42}
                   />
                   <div><strong>{agent.name}</strong><span>{agent.title}</span></div>
@@ -138,9 +137,9 @@ export default async function PackagePage({ params }: Props) {
               <Link href={`/bots/${candidate.id}`}>
                 <div>
                   <h3>{candidate.name}</h3>
-                  <MausAvatar
-                    color={candidate.agents[0]?.appearance.color ?? "green"}
-                    expression={candidate.agents[0]?.appearance.mascotExpression ?? "happy"}
+                  <AgentMark
+                    name={candidate.agents[0]?.name ?? candidate.name}
+                    color={candidate.agents[0]?.appearance.color ?? "blue"}
                     size={42}
                   />
                 </div>
