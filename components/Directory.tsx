@@ -137,7 +137,7 @@ export default function Directory({ entries }: { entries: DirectoryEntry[] }) {
               />
             </label>
           </div>
-          <img className="hero-logo" src={asset("/aria-logo.png")} alt="" width={240} height={232} />
+          <img className="hero-logo" src={asset("/aria-logo.png")} alt="" width={148} height={143} />
         </section>
 
         <section className="directory-list" aria-label="Aria Workplace teams">
