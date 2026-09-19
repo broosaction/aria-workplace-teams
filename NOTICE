@@ -1,0 +1,6 @@
+This repository includes team playbooks and a directory site derived from
+openmausbot-teams (https://github.com/milind-soni/openmausbot-teams),
+copyright Milind Soni and OpenMausBot contributors, licensed under MIT.
+
+Aria Workplace catalog entries use format aria.catalog version 1. Playbook
+Markdown still uses botmrr: 1 frontmatter so Aria Workplace can import them.

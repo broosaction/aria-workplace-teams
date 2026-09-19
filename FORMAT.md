@@ -1,6 +1,6 @@
 # Aria Workplace team playbooks
 
-Aria Workplace loads this repository's `catalog.json` into **+ → Teams → Explore**.
+Aria Workplace loads this repository's `catalog.json` into **+ → Teams → Explore**. The web directory lists the same files and one-click install links.
 
 The catalog format is `aria.catalog` version 1. Each team entry must use safe relative paths under `teams/<slug>/`.
 
@@ -34,6 +34,10 @@ Give this file to your Chief of Staff.
 ## Completion rule
 ```
 
+The `botmrr: 1` frontmatter is required for one-click import. General-purpose agent products can ignore it. The Markdown body must stand on its own when pasted into an agent conversation.
+
 Required body sections are Activation, Mission, Outcomes, Connections, Team, Chief of Staff, and Completion rule.
 
 Imports land disabled. Connections stay off until a person approves them, and routines arrive paused. Playbooks never carry credentials, conversations, permissions, memory, or computer access.
+
+Legacy JSON team files under `teams/` use format `aria.team` version 1 and the `.mausteam.json` filename the desktop catalog still expects.
