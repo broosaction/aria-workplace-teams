@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { asset } from "@/lib/assets";
 
 import "./globals.css";
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   },
   description:
     "Discover portable AI teams from Broos Action for sales, marketing, research, operations, coding, and everyday work.",
-  icons: { icon: "/aria-icon.png" },
+  icons: { icon: asset("/aria-icon.png") },
   openGraph: {
     title: "Aria Workplace Teams",
     description: "Pick a team, connect your apps, and turn it on.",
