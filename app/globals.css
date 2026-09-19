@@ -119,7 +119,7 @@ img { display: block; max-width: 100%; }
 }
 
 .brand-lockup { display: inline-flex; align-items: center; gap: 10px; }
-.brand-mark, .footer-mark { flex: 0 0 auto; object-fit: contain; border-radius: 8px; }
+.brand-mark, .footer-mark { flex: 0 0 auto; object-fit: contain; }
 .brand-copy { display: inline-flex; align-items: center; gap: 8px; }
 .brand-name { font-size: 15px; font-weight: 600; letter-spacing: -0.03em; }
 .brand-badge {
@@ -157,10 +157,18 @@ img { display: block; max-width: 100%; }
   padding: 36px 0 0;
 }
 
-.directory-hero { max-width: 720px; padding: 20px 0 40px; }
+.directory-hero {
+  padding: 20px 0 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(240px, 28vw);
+  gap: 48px;
+  align-items: center;
+}
+.directory-hero-copy { min-width: 0; max-width: 640px; }
 .directory-hero .overline { color: var(--accent-text); }
 .directory-hero h1 { margin: 10px 0 0; font-size: clamp(36px, 5vw, 52px); font-weight: 630; line-height: 1.04; letter-spacing: -0.05em; }
-.directory-hero > p { margin: 14px 0 0; color: var(--muted); font-size: 16px; line-height: 1.55; letter-spacing: -0.015em; }
+.directory-hero-copy > p { margin: 14px 0 0; color: var(--muted); font-size: 16px; line-height: 1.55; letter-spacing: -0.015em; }
+.hero-logo { width: 100%; height: auto; justify-self: end; }
 .hero-actions { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 
 .hero-search {
@@ -370,6 +378,7 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 760px) {
   .header-inner, .directory-center, .site-footer { width: min(var(--page-width), calc(100% - 32px)); }
+  .directory-hero { grid-template-columns: minmax(0, 1fr) 150px; gap: 24px; }
   .detail-heading-row { grid-template-columns: 1fr; gap: 24px; }
   .detail-install { align-items: flex-start; }
   .detail-author { margin-left: 0; }
@@ -382,6 +391,8 @@ img { display: block; max-width: 100%; }
   .brand-name { font-size: 13px; }
   .header-links { gap: 13px; font-size: 11px; }
   .header-links a:first-child { display: none; }
+  .directory-hero { grid-template-columns: 1fr; }
+  .hero-logo { width: 132px; justify-self: start; }
   .directory-hero h1 { font-size: 36px; }
   .directory-controls { align-items: stretch; flex-direction: column; }
   .directory-select { flex-basis: auto; width: 100%; }

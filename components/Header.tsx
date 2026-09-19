@@ -7,7 +7,7 @@ export default function Header() {
     <header className="site-header">
       <nav className="header-inner" aria-label="Primary navigation">
         <Link href="/" className="brand-lockup" aria-label="Aria Workplace Teams home">
-          <BrandMark size={32} />
+          <BrandMark size={40} />
           <span className="brand-copy">
             <span className="brand-name">Aria Workplace</span>
             <span className="brand-badge">Teams</span>

@@ -66,7 +66,7 @@ export default function MausAvatar({
   color = "blue",
   expression = "happy",
   size = 44,
-  animated = false,
+  animated = true,
   className,
   label,
   bodyId,
@@ -98,8 +98,8 @@ export default function MausAvatar({
       autoExpression={animated}
       effects={animated}
       glyphs={false}
-      lookAround={animated ? 0.35 : 0}
-      motion={animated ? 0.72 : 0}
+      lookAround={animated ? 0.55 : 0}
+      motion={animated ? 1 : 0}
     />
   );
 }

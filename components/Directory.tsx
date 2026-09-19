@@ -11,6 +11,7 @@ import { useMemo, useState, type CSSProperties } from "react";
 
 import MausAvatar from "@/components/MausAvatar";
 import ConnectorIcon from "@/components/ConnectorIcon";
+import { asset } from "@/lib/assets";
 
 export interface DirectoryEntry {
   id: string;
@@ -50,7 +51,8 @@ function TeamCard({ entry, index }: { entry: DirectoryEntry; index: number }) {
             color={lead.color}
             expression={lead.expression ?? "happy"}
             bodyId={lead.body}
-            size={48}
+            size={52}
+            animated
           />
         </div>
 
@@ -119,20 +121,23 @@ export default function Directory({ entries }: { entries: DirectoryEntry[] }) {
     <main className="directory-page">
       <div className="directory-center">
         <section className="directory-hero" aria-labelledby="directory-title">
-          <p className="overline">BROOS ACTION</p>
-          <h1 id="directory-title">Ready-to-run AI teams</h1>
-          <p>Portable playbooks for sales, marketing, research, operations, coding, and everyday work.</p>
-          <label className="hero-search">
-            <Search size={19} strokeWidth={1.7} aria-hidden="true" />
-            <span className="sr-only">Search teams</span>
-            <input
-              type="search"
-              placeholder="Search teams…"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              autoComplete="off"
-            />
-          </label>
+          <div className="directory-hero-copy">
+            <p className="overline">BROOS ACTION</p>
+            <h1 id="directory-title">Ready-to-run AI teams</h1>
+            <p>Portable playbooks for sales, marketing, research, operations, coding, and everyday work.</p>
+            <label className="hero-search">
+              <Search size={19} strokeWidth={1.7} aria-hidden="true" />
+              <span className="sr-only">Search teams</span>
+              <input
+                type="search"
+                placeholder="Search teams…"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                autoComplete="off"
+              />
+            </label>
+          </div>
+          <img className="hero-logo" src={asset("/aria-logo.png")} alt="" width={240} height={232} />
         </section>
 
         <section className="directory-list" aria-label="Aria Workplace teams">

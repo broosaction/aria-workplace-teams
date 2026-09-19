@@ -4,7 +4,7 @@ export default function BrandMark({ size = 32 }: { size?: number }) {
   return (
     <img
       className="brand-mark"
-      src={asset("/aria-icon.png")}
+      src={asset("/aria-logo.png")}
       alt=""
       width={size}
       height={size}
